@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Authorize Entry | LuxeCart</title>
+    <link rel="stylesheet" href="output.css">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet" />
+</head>
+
+<body>
+
+
+    <%- include('../partials/nav') %>
+
+        <main class="min-h-screen flex items-center justify-center bg-[#050505] py-20 px-4 relative overflow-hidden">
+            <div
+                class="absolute top-[-10%] left-[-10%] w-[600px] h-[600px] bg-pink-600/10 rounded-full blur-[120px] animate-pulse">
+            </div>
+            <div class="absolute bottom-[-10%] right-[-10%] w-[600px] h-[600px] bg-indigo-600/10 rounded-full blur-[120px] animate-pulse"
+                style="animation-delay: 2s;"></div>
+
+            <div
+                class="w-full max-w-[440px] bg-[#0c0c0c]/80 backdrop-blur-2xl p-10 md:p-14 rounded-[48px] border border-white/[0.03] shadow-[0_32px_64px_-16px_rgba(0,0,0,0.6)] relative z-10 transition-all duration-700 hover:border-pink-500/20 group">
+
+                <div
+                    class="absolute top-0 left-1/2 -translate-x-1/2 w-24 h-[2px] bg-gradient-to-r from-transparent via-pink-600 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700">
+                </div>
+
+                <div class="text-center mb-14">
+                    <h1 class="text-5xl font-black italic tracking-tighter uppercase mb-4 text-white">
+                        Luxe<span class="text-pink-600">Cart</span>
+                    </h1>
+                    <div class="flex items-center justify-center gap-3">
+                        <div class="h-[1px] w-4 bg-zinc-800"></div>
+                        <p class="text-[8px] font-black uppercase tracking-[0.5em] text-zinc-500">Private Collection
+                            Access</p>
+                        <div class="h-[1px] w-4 bg-zinc-800"></div>
+                    </div>
+                </div>
+
+                <form action="/login" method="POST" class="space-y-8">
+
+                    <div class="relative">
+                        <input type="email" name="email" required placeholder=" "
+                            class="peer w-full px-0 py-4 bg-transparent border-b border-zinc-800 text-[13px] text-white font-medium outline-none focus:border-pink-600 transition-all placeholder-transparent">
+                        <label
+                            class="absolute left-0 top-0 text-[10px] font-black uppercase tracking-widest text-zinc-500 transition-all peer-placeholder-shown:top-4 peer-placeholder-shown:text-xs peer-focus:top-0 peer-focus:text-[10px] peer-focus:text-pink-600 pointer-events-none">
+                            Identity / Email
+                        </label>
+                    </div>
+
+                    <div class="relative">
+                        <input type="password" id="loginPassword" name="password" required placeholder=" "
+                            class="peer w-full px-0 py-4 bg-transparent border-b border-zinc-800 text-[13px] text-white font-medium outline-none focus:border-pink-600 transition-all placeholder-transparent">
+
+                        <label
+                            class="absolute left-0 top-0 text-[10px] font-black uppercase tracking-widest text-zinc-500 transition-all peer-placeholder-shown:top-4 peer-placeholder-shown:text-xs peer-focus:top-0 peer-focus:text-[10px] peer-focus:text-pink-600 pointer-events-none">
+                            Secret Key / Password
+                        </label>
+
+                        <div class="absolute right-0 top-4 flex items-center gap-3">
+                            <button type="button" id="toggleBtn"
+                                class="text-zinc-600 hover:text-pink-500 transition-colors text-[12px]">
+                                <i class="ri-eye-line" id="eyeIcon"></i>
+                            </button>
+                            <a href="#"
+                                class="text-[8px] font-black uppercase text-zinc-600 hover:text-pink-500 transition-colors">Lost?</a>
+                        </div>
+                    </div>
+
+                    <div class="pt-6">
+                        <button type="submit"
+                            class="group/btn relative w-full overflow-hidden bg-white text-black py-6 rounded-2xl font-black uppercase tracking-[0.4em] text-[11px] transition-all duration-500 hover:shadow-[0_0_40px_rgba(255,255,255,0.1)] active:scale-[0.98]">
+                            <span
+                                class="relative z-10 group-hover/btn:text-white transition-colors duration-500">Authorize
+                                Entry</span>
+                            <div
+                                class="absolute inset-0 bg-pink-600 translate-y-[101%] group-hover/btn:translate-y-0 transition-transform duration-500 ease-out">
+                            </div>
+                        </button>
+                    </div>
+
+                </form>
+
+                <div class="mt-14 text-center">
+                    <p class="text-[9px] font-black uppercase tracking-[0.3em] text-zinc-600">
+                        New Prospect?
+                        <a href="/signup"
+                            class="text-zinc-400 hover:text-pink-600 transition-all ml-1 border-b border-zinc-800 hover:border-pink-600 pb-1">Create
+                            Identity</a>
+                    </p>
+                </div>
+
+            </div>
+        </main>
+        <%- include('../partials/footer') %>
+
+            <script>
+                const passwordInput = document.querySelector('#loginPassword');
+                const toggleBtn = document.querySelector('#toggleBtn');
+                const eyeIcon = document.querySelector('#eyeIcon');
+
+                toggleBtn.addEventListener('click', () => {
+                    const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+                    passwordInput.setAttribute('type', type);
+
+                    if (type === 'text') {
+                        eyeIcon.classList.remove('ri-eye-line');
+                        eyeIcon.classList.add('ri-eye-off-line');
+                    } else {
+                        eyeIcon.classList.remove('ri-eye-off-line');
+                        eyeIcon.classList.add('ri-eye-line');
+                    }
+                });
+            </script>
+
+</body>
+
+</html>

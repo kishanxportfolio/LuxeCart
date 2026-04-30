@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LuxeCart | Premium Shop</title>
+    <link rel="stylesheet" href="/output.css">
+    <style>
+        .shop-font {
+            font-variant: small-caps;
+        }
+        .sidebar-scroll::-webkit-scrollbar {
+            width: 4px;
+        }
+
+        .sidebar-scroll::-webkit-scrollbar-thumb {
+            background: #e2e8f0;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50 scroll-smooth shop-font text-gray-900">
+
+    <%- include('../partials/nav') %>
+        <%- include('../partials/seconderynav') %>
+
+            <main class="max-w-7xl mx-auto px-4 md:px-6 py-10">
+                <div class="flex flex-col md:flex-row gap-10">
+
+                    <aside
+                        class="w-full md:w-64 hidden md:block border-r border-b border-gray-200 pr-8 sticky top-24 h-fit max-h-[85vh] overflow-y-auto sidebar-scroll">
+
+                        <% if (category !=="all" ) { %>
+                            <a href="/shop"
+                                class="flex items-center text-xs font-bold text-gray-400 hover:text-black transition-all mb-8 group">
+                                <span class="group-hover:-translate-x-1 transition-transform">←</span> &nbsp; BACK TO
+                                ALL PRODUCTS
+                            </a>
+                            <% } %>
+
+                                <h2
+                                    class="text-xs uppercase tracking-[0.2em] font-bold text-gray-400 mb-8 border-b pb-2">
+                                    Filters</h2>
+
+                                <div class="space-y-10">
+                                    <section>
+                                        <h3 class="text-sm font-bold mb-4 uppercase tracking-wide">Collections</h3>
+                                        <ul class="space-y-3 text-sm">
+                                            <% ['all', 'women' , 'men' , 'genz' ].forEach(cat=> { %>
+                                                <li>
+                                                    <a href="/shop/<%= cat %>"
+                                                        class="flex justify-between items-center transition-all <%= category === cat ? 'text-pink-600 font-bold' : 'text-gray-500 hover:text-black' %>">
+                                                        <%= cat==='all' ? 'All Products' : (cat==='genz' ? 'Gen Z' :
+                                                            cat.charAt(0).toUpperCase() + cat.slice(1)) %>
+                                                            <% if(category===cat) { %><span
+                                                                    class="w-1.5 h-1.5 bg-pink-600 rounded-full"></span>
+                                                                <% } %>
+                                                    </a>
+                                                </li>
+                                                <% }) %>
+                                        </ul>
+                                    </section>
+
+                                    <% if(category==="women" || category==="men" || category==="genz" ) { %>
+                                        <section class="animate-fadeIn">
+                                            <h3 class="text-xs font-bold text-gray-400 uppercase mb-4 tracking-tighter">
+                                                Sub-Categories</h3>
+                                            <ul class="space-y-2 text-sm text-gray-600">
+
+                                                <% if(category==="women" ) { %>
+                                                    <li><a href="/shop/women/clothing"
+                                                            class="hover:text-black">Clothing</a></li>
+                                                    <li><a href="/shop/women/footwear"
+                                                            class="hover:text-black">Footwear</a></li>
+                                                    <li><a href="/shop/women/jewellery"
+                                                            class="hover:text-black">Jewellery</a></li>
+                                                    <% } else if(category==="men" ) { %>
+                                                        <li><a href="/shop/men/clothing"
+                                                                class="hover:text-black">Clothing</a></li>
+                                                        <li><a href="/shop/men/footwear"
+                                                                class="hover:text-black">Footwear</a>
+                                                        </li>
+                                                        <li><a href="/shop/men/watches"
+                                                                class="hover:text-black">Watches</a></li>
+                                                        <li><a href="/shop/men/jewellery"
+                                                                class="hover:text-black">Jewellery</a></li>
+                                                        <% } else if(category==="genz" ) { %>
+                                                            <li><a href="/shop/genz/streetwear"
+                                                                    class="hover:text-black">Streetwear</a></li>
+                                                            <li><a href="/shop/genz/accessories"
+                                                                    class="hover:text-black">Accessories</a></li>
+                                                            <li><a href="/shop/genz/footwear"
+                                                                    class="hover:text-black">Footwear</a></li>
+                                                            <li><a href="/shop/genz/tranding"
+                                                                    class="hover:text-black">Tranding Now</a></li>
+                                                            <% } %>
+                                            </ul>
+                                        </section>
+                                        <% } %>
+
+                                            <section>
+                                                <h3 class="text-sm font-bold mb-4 uppercase">Price Range</h3>
+                                                <input type="range" min="0" max="300" value="150"
+                                                    class="w-full h-1 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-black"
+                                                    id="priceRange">
+                                                <div
+                                                    class="flex justify-between text-[10px] font-bold mt-2 text-gray-400">
+                                                    <span>$0</span>
+                                                    <span id="priceValue" class="text-pink-600 text-sm">$300</span>
+                                                </div>
+                                            </section>
+
+                                            <section>
+                                                <h3 class="text-sm font-bold mb-4 uppercase">Offers</h3>
+                                                <div class="grid grid-cols-1 gap-2">
+                                                    <% [50, 40, 30, 20].forEach(disc=> { %>
+                                                        <a href="/shop/discount/<%= disc %>"
+                                                            class="text-xs py-2 px-3 border border-gray-100 rounded hover:bg-black hover:text-white transition-colors text-center">
+                                                            <%= disc %>% OFF OR MORE
+                                                        </a>
+                                                        <% }) %>
+                                                </div>
+                                            </section>
+                                </div>
+                    </aside>
+
+                    <div class="flex-1">
+
+                        <% if(category==="all" ) { %>
+                            <div class="grid grid-cols-1 gap-6 mb-12">
+                                <% banner.forEach(item=> { %>
+                                    <a href="<%= item.link %>" class="overflow-hidden rounded-2xl shadow-lg group">
+                                        <img src="<%= item.Image %>" alt="Banner"
+                                            class="w-full h-48 md:h-64 object-cover group-hover:scale-105 transition-transform duration-700">
+                                    </a>
+                                    <% }) %>
+                            </div>
+
+                            <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-16">
+                                <% offerCards.forEach(card=> { %>
+                                    <div
+                                        class="relative overflow-hidden rounded-xl shadow-sm group cursor-pointer aspect-[4/5]">
+                                        <img src="<%= card.Image %>" class="w-full h-full object-cover">
+                                        <div
+                                            class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent flex flex-col justify-end p-4">
+                                            <h4 class="text-white font-bold text-sm">
+                                                <%= card.title %>
+                                            </h4>
+                                            <p class="text-pink-400 text-xs font-bold uppercase tracking-widest">
+                                                <%= card.discount %>% Off
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <% }) %>
+                            </div>
+                            <% } %>
+
+                                <section>
+                                    <div class="flex justify-between items-end mb-8 border-b pb-4">
+                                        <h2 class="text-3xl font-bold capitalize">
+                                            <%= category==='all' ? 'Our Collection' : category %>
+                                        </h2>
+                                        <p class="text-gray-400 text-sm">Showing 1–12 of 48 results</p>
+                                    </div>
+
+                                    <div class="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-6 gap-y-10">
+                                        <% let displayProducts=(category==="all" ) ? women.concat(men, genz).slice(0, 8)
+                                            : products; displayProducts.forEach(product=> {
+                                            %>
+                                            <div class="group relative flex flex-col">
+                                                <div class="relative overflow-hidden bg-white rounded-xl aspect-[3/4]">
+                                                    <img src="<%= product.image %>" alt="<%= product.name %>"
+                                                        class="w-full h-full object-contain p-4 group-hover:scale-110 transition-transform duration-500">
+
+                                                    <% if(product.price> product.offerPrice) { %>
+                                                        <span
+                                                            class="absolute top-3 left-3 bg-red-600 text-white text-[10px] font-bold px-2 py-1 rounded">SALE</span>
+                                                        <% } %>
+                                                </div>
+
+                                                <div class="mt-4 flex-1 flex flex-col">
+                                                    <div class="flex text-[10px] text-yellow-500 mb-1">
+                                                        <% for(let i=1; i<=5; i++) { %>
+                                                            <%= i <=product.rating ? "★" : "☆" %>
+                                                                <% } %>
+                                                    </div>
+                                                    <h3
+                                                        class="text-sm font-bold text-gray-800 line-clamp-2 leading-tight h-10">
+                                                        <%= product.name %>
+                                                    </h3>
+
+                                                    <div
+                                                        class="mt-4 flex items-center justify-between gap-2 border-t border-zinc-50 pt-4">
+
+                                                        <div class="flex flex-col">
+                                                            <div class="flex items-center gap-2">
+                                                                <span class="text-xl font-black italic">$<%=
+                                                                        product.offerPrice %></span>
+                                                                <span
+                                                                    class="text-[10px] text-gray-400 line-through font-medium">$
+                                                                    <%= product.price %>
+                                                                </span>
+                                                            </div>
+                                                            <p
+                                                                class="text-[9px] text-pink-600 font-bold uppercase tracking-tighter">
+                                                                Limited Offer</p>
+                                                        </div>
+
+                                                        <form action="/add-to-cart/<%= product._id %>" method="POST">
+                                                            <button
+                                                                class="bg-white p-3 rounded-full shadow-xl hover:bg-black hover:text-white transition">🛒</button>
+                                                        </form>
+                                                        </form>
+                                                    </div>
+
+                                                    <a href="/product/<%= product._id %>"
+                                                        class="mt-4 w-full bg-black text-white text-center py-2.5 rounded-lg text-xs font-bold hover:bg-gray-800 transition">
+                                                        VIEW DETAILS
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            <% }) %>
+                                    </div>
+                                </section>
+                    </div>
+                </div>
+            </main>
+
+            <button onclick="window.scrollTo({top:0, behavior:'smooth'})"
+                class="flex items-center gap-3 mx-auto my-20 px-10 py-4 bg-black text-white text-xs font-bold rounded-full 
+                   shadow-2xl hover:bg-pink-700 hover:-translate-y-2 transition-all duration-500 uppercase tracking-widest">
+                <span>↑</span>
+                <span>Back to Top</span>
+            </button>
+
+            <%- include('../partials/footer') %>
+
+                <script>
+                    // Price Range Script
+                    const priceRange = document.getElementById('priceRange');
+                    const priceValue = document.getElementById('priceValue');
+                    priceRange.addEventListener("input", () => {
+                        priceValue.textContent = "$" + priceRange.value;
+                    });
+                </script>
+</body>
+
+</html>

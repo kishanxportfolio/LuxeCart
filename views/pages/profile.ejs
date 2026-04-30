@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LuxeCart | My Profile</title>
+    <link rel="stylesheet" href="output.css">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet"/>
+</head>
+<body class="bg-black text-white font-sans selection:bg-pink-600">
+    <%- include('../partials/nav') %> 
+
+    <div class="flex min-h-screen">
+        <aside class="w-64 border-r border-zinc-800 hidden md:flex flex-col p-6">
+            <div class="mb-10">
+                <h1 class="text-2xl font-black italic tracking-tighter text-pink-600">LUXECART</h1>
+            </div>
+
+            <nav class="space-y-2 flex-grow">
+                <a href="#" class="flex items-center gap-3 px-4 py-3 bg-zinc-900 text-pink-500 rounded-lg border border-zinc-800">
+                    <i class="ri-dashboard-3-line"></i> <span class="text-sm font-bold uppercase tracking-wider">Dashboard</span>
+                </a>
+                <a href="#" class="flex items-center gap-3 px-4 py-3 text-zinc-500 hover:text-white transition-all">
+                    <i class="ri-shopping-bag-3-line"></i> <span class="text-sm font-bold uppercase tracking-wider">My Orders</span>
+                </a>
+                <a href="#" class="flex items-center gap-3 px-4 py-3 text-zinc-500 hover:text-white transition-all">
+                    <i class="ri-map-pin-2-line"></i> <span class="text-sm font-bold uppercase tracking-wider">Addresses</span>
+                </a>
+            </nav>
+
+            <div class="pt-6 border-t border-zinc-800">
+                <a href="/logout" class="flex items-center gap-3 px-4 py-3 text-red-500 hover:bg-red-500/10 rounded-lg transition-all">
+                    <i class="ri-logout-box-r-line"></i> <span class="text-sm font-bold uppercase tracking-wider">Logout</span>
+                </a>
+            </div>
+        </aside>
+
+        <main class="flex-1 p-8 overflow-y-auto">
+            <header class="flex justify-between items-center mb-10">
+                <div>
+                    <h2 class="text-3xl font-black uppercase tracking-tighter italic">Account <span class="text-pink-600">Overview</span></h2>
+                    <p class="text-zinc-500 text-xs mt-1 uppercase tracking-widest font-bold">Manage your orders and personal info</p>
+                </div>
+                <div class="flex items-center gap-4">
+                    <div class="text-right">
+                        <p class="text-sm font-black text-white uppercase tracking-wider"><%= user.name %></p>
+                        <p class="text-[10px] text-zinc-500 font-bold uppercase tracking-widest">Premium Member</p>
+                    </div>
+                    <div class="w-12 h-12 rounded-full bg-zinc-900 border border-pink-600 flex items-center justify-center text-pink-600 font-black text-xl">
+                        <%= user.name.charAt(0).toUpperCase() %>
+                    </div>
+                </div>
+            </header>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+                <div class="bg-zinc-900 p-6 border border-zinc-800 rounded-xl hover:border-pink-600 transition-all group">
+                    <a href="/cart" class="block no-underline text-inherit">
+                    <i class="ri-shopping-cart-2-line text-2xl text-pink-600 mb-4 block"></i>
+                    <h3 class="text-zinc-500 text-[10px] uppercase font-black tracking-widest">In your Cart</h3>
+                    <p class="text-3xl font-black mt-1"><%= cart ? cart.items.length : 0 %> Items</p></a>
+                </div>
+                <div class="bg-zinc-900 p-6 border border-zinc-800 rounded-xl hover:border-pink-600 transition-all">
+                    <i class="ri-box-3-line text-2xl text-pink-600 mb-4 block"></i>
+                    <h3 class="text-zinc-500 text-[10px] uppercase font-black tracking-widest">Orders Placed</h3>
+                    <p class="text-3xl font-black mt-1">12 Orders</p>
+                </div>
+                <div class="bg-zinc-900 p-6 border border-zinc-800 rounded-xl hover:border-pink-600 transition-all">
+                    <i class="ri-coupon-2-line text-2xl text-pink-600 mb-4 block"></i>
+                    <h3 class="text-zinc-500 text-[10px] uppercase font-black tracking-widest">Luxe Points</h3>
+                    <p class="text-3xl font-black mt-1">2,450</p>
+                </div>
+            </div>
+
+            <div class="bg-zinc-900 border border-zinc-800 rounded-xl overflow-hidden">
+                <div class="p-6 border-b border-zinc-800 flex justify-between items-center">
+                    <h3 class="font-black uppercase text-sm tracking-widest">Recent Transactions</h3>
+                    <button class="text-[10px] font-black uppercase text-pink-600 hover:underline">View All</button>
+                </div>
+                <div class="p-0">
+                    <table class="w-full text-left text-sm">
+                        <thead class="bg-zinc-950 text-zinc-500 text-[10px] uppercase tracking-widest font-black">
+                            <tr>
+                                <th class="p-4">Order ID</th>
+                                <th class="p-4">Date</th>
+                                <th class="p-4">Status</th>
+                                <th class="p-4 text-right">Amount</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-zinc-800">
+                            <tr class="hover:bg-zinc-800/30 transition-all">
+                                <td class="p-4 font-mono text-zinc-400">#LX-9902</td>
+                                <td class="p-4 text-zinc-400">20 April, 2026</td>
+                                <td class="p-4"><span class="px-2 py-1 bg-green-500/10 text-green-500 text-[10px] font-black uppercase rounded">Delivered</span></td>
+                                <td class="p-4 text-right font-black">₹4,999</td>
+                            </tr>
+                            <tr class="hover:bg-zinc-800/30 transition-all">
+                                <td class="p-4 font-mono text-zinc-400">#LX-9854</td>
+                                <td class="p-4 text-zinc-400">18 April, 2026</td>
+                                <td class="p-4"><span class="px-2 py-1 bg-orange-500/10 text-orange-500 text-[10px] font-black uppercase rounded">Processing</span></td>
+                                <td class="p-4 text-right font-black">₹2,450</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <%- include('../partials/footer.ejs') %>
+</body>
+</html>
